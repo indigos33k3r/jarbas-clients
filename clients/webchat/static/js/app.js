@@ -20,7 +20,7 @@
 
 var ip = ""
 var por = ""
-
+var voice = "UK English Male"
 
 function set_ip(val)
 {
@@ -33,7 +33,6 @@ function set_port(val)
     port_alt=val
     console.log("Socket Port="+ port_alt)
 }
-
 
 
 $(document).ready(function(){
@@ -52,7 +51,6 @@ $(document).ready(function(){
     var socket = new WebSocket("ws://"+ip+":"+port+"/ws");
 	console.log("ws://"+ip+":"+port+"/ws")
     }
-
 
 
 	socket.onopen = function(){  
@@ -74,7 +72,6 @@ $(document).ready(function(){
 	  console.log("sending:" + message.data);
 	  socket.send(message.data);
 	};
-
 
 
 	$('.chat[data-chat=person2]').addClass('active-chat')
@@ -121,10 +118,10 @@ $(document).ready(function(){
 		$('.chat').append('<div class="bubble you loading"><i class="fa fa-forward" aria-hidden="true"></i>&nbsp;&nbsp;' + msg + '</div>')
 	    } else if (msg == 'backward') {
 		$('.chat').append('<div class="bubble you loading"><i class="fa fa-backward" aria-hidden="true"></i>&nbsp;&nbsp;' + msg + '</div>')
-	    } else if (msg == 'Web Chat Client from JCASOFT') {
-		$('.chat').append('<div class="bubble you loading"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;' + msg + '</div>')
 	    } else {
-		$('.chat').append('<div class="bubble you"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;&nbsp;' + msg + '</div>')
+
+		    $('.chat').append('<div class="bubble you"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;&nbsp;' + msg + '</div>')
+		    responsiveVoice.speak(msg, voice);
 	    }
 	}
 
